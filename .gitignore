@@ -1,0 +1,33 @@
+# virtual environments
+venv/
+.venv/
+
+# Streamlit local secrets
+.streamlit/
+.streamlit/secrets.toml
+secrets.toml
+.env
+
+# Local generated data
+history.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+old_app.py
+old_gpt_service.py
+old_models.py
+old_parser.py
+old_scoring.py
+old_requirements.txt
