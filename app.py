@@ -17,6 +17,7 @@ currentsapi_key = os.getenv("CURRENTS_API_KEY")  # Устанавливаем к
 if not openai.api_key or not currentsapi_key:
     raise ValueError("Переменные окружения OPENAI_API_KEY и CURRENTS_API_KEY должны быть установлены")
 
+
 class Topic(BaseModel):
     topic: str  # Модель данных для получения темы в запросе
 
@@ -48,7 +49,7 @@ def generate_content(topic: str):
     try:
         # Генерация заголовка для статьи
         title = openai.ChatCompletion.create(
-            model="gpt-4o-mini",  # Используем модель GPT-4o-mini
+            model="gpt-4.1-mini",  # Используем модель GPT-4.1-mini
             messages=[{
                 "role": "user", 
                 "content": f"Придумайте привлекательный и точный заголовок для статьи на тему '{topic}', с учётом актуальных новостей:\n{recent_news}. Заголовок должен быть интересным и ясно передавать суть темы."
@@ -60,7 +61,7 @@ def generate_content(topic: str):
 
         # Генерация мета-описания для статьи
         meta_description = openai.ChatCompletion.create(
-            model="gpt-4o-mini",
+            model="gpt-4.1-mini",
             messages=[{
                 "role": "user", 
                 "content": f"Напишите мета-описание для статьи с заголовком: '{title}'. Оно должно быть полным, информативным и содержать основные ключевые слова."
@@ -72,7 +73,7 @@ def generate_content(topic: str):
 
         # Генерация полного контента статьи
         post_content = openai.ChatCompletion.create(
-            model="gpt-4o-mini",
+            model="gpt-4.1-mini",
             messages=[{
                 "role": "user", 
                 "content": f"""Напишите подробную статью на тему '{topic}', используя последние новости:\n{recent_news}. 
@@ -122,4 +123,4 @@ if __name__ == "__main__":
     import uvicorn
     # Запуск приложения с указанием порта
     port = int(os.getenv("PORT", 8000))
-    uvicorn.run("app:app", host="0.0.0.0", port=port)
+    uvicorn.run("app:app", host="127.0.0.1", port=port)
